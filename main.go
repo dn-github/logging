@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/dn-github/logging/logger"
 	"gitlab.myteksi.net/gophers/go/commons/util/log/logging"
 	"gitlab.myteksi.net/gophers/go/commons/util/log/yall/slog"
@@ -32,4 +33,5 @@ func main() {
 	})
 
 	sLogger.Warn("sLogger", "WARNING: %s", "this is a test warning")
+	fmt.Println("successfully executed")
 }

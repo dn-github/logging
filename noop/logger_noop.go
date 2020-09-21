@@ -1,4 +1,4 @@
-package loggingapi
+package noop
 
 import "github.com/dn-github/logging/loggingapi"
 

@@ -1,4 +1,4 @@
-package loggingapi
+package stdout
 
 import (
 	"fmt"
