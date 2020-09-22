@@ -4,35 +4,35 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 
-	"github.com/dn-github/logging/loggingapi"
 	"gitlab.myteksi.net/gophers/go/commons/util/log/yall/slog"
 	"gitlab.myteksi.net/gophers/go/commons/util/tags"
 )
 
 const (
-	fnKey           = "fn"
-	defaultStatsKey = "service"
+	fnKey = "fn"
 )
+
+// Logger defines required logging interface
+// Logger abstracts the logger interface
+type Logger interface {
+	Error(eventType, message string, args ...tags.Tag)
+	Warn(eventType, message string, args ...tags.Tag)
+	Info(eventType, message string, args ...tags.Tag)
+	Debug(eventType, message string, args ...tags.Tag)
+}
 
 type logger struct {
 	slogger *slog.Logger
 }
 
-var initOnce sync.Once
-
 // New initializes logger from ucm config
-func New(config *slog.Config) loggingapi.Logger {
+func New(config *slog.Config) Logger {
 	if config == nil {
 		slogger, _, _ := slog.Stdout()
 		return &logger{slogger}
 	}
 	slogger, _, _ := slog.FromConfig(config)
-
-	initOnce.Do(func() {
-		Default = &logger{slogger}
-	})
 
 	return &logger{slogger}
 }

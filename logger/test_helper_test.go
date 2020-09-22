@@ -1,4 +1,4 @@
-package loggingapi
+package logger
 
 import (
 	"reflect"

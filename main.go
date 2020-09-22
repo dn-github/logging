@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/dn-github/logging/logger"
 	"gitlab.myteksi.net/gophers/go/commons/util/log/logging"
 	"gitlab.myteksi.net/gophers/go/commons/util/log/yall/slog"
+	"gitlab.myteksi.net/gophers/go/commons/util/tags"
 	"gitlab.myteksi.net/gophers/go/staples/logging/loggingapi"
 )
 
@@ -17,10 +19,11 @@ func main() {
 
 	logging.Init(logConfig)
 
-	var gkLogger, sLogger loggingapi.Logger
+	var gkLogger loggingapi.Logger
 	gkLogger = logging.GetDefaultLogger()
 	gkLogger.Warn("gkLogger", "WARNING: %s", "this is a test warning")
 
+	var sLogger logger.Logger
 	// util/log/yall/slog
 	sLogger = logger.New(&slog.Config{
 		SyslogTag:       "structuredlog.action-plan-service",
@@ -32,6 +35,6 @@ func main() {
 		Development:     false,
 	})
 
-	sLogger.Warn("sLogger", "WARNING: %s", "this is a test warning")
+	sLogger.Warn("sLogger", "WARNING: %s", tags.CustomTag("abc", 1))
 	fmt.Println("successfully executed")
 }
